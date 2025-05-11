@@ -1,3 +1,8 @@
+## This Source Code Form is subject to the terms of the Mozilla Public
+## License, v. 2.0. If a copy of the MPL was not distributed with this
+## file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
+
 ## Godot has good support for nine-patch rectangles and even support for
 ## nine-patch containers using PanelContainers with a StyleBoxTexture, but doing
 ## so does not let you specify a background independently or customize the
@@ -14,6 +19,7 @@
 
 @tool
 extends MarginContainer
+class_name NinePatchContainer
 
 #-----
 # @export variables
@@ -22,11 +28,20 @@ extends MarginContainer
 @export var background_node: Control:
 	get: return _background_node
 	set(value):
-		if _background_node:
-			remove_child(_background_node)
+		if _background_node == value:
+			return
+
 		_background_node = value
+
 		if value:
-			add_child(value)
+			var existing_parent = value.get_parent()
+			if existing_parent:
+				if existing_parent != self:
+					existing_parent.remove_child(value)
+					add_child(value)
+			else:
+				add_child(value)
+
 			move_child(value, 0)  # Background should be first (bottom)
 		update_configuration_warnings()
 
@@ -37,12 +52,21 @@ extends MarginContainer
 @export var frame_node: Control:
 	get: return _frame_node
 	set(value):
-		if _frame_node:
-			remove_child(_frame_node)
+		if _frame_node == value:
+			return
+
 		_frame_node = value
+
 		if value:
-			add_child(value)
-			move_child(value, 1)  # Frame should be second (middle)
+			var existing_parent = value.get_parent()
+			if existing_parent:
+				if existing_parent != self:
+					existing_parent.remove_child(value)
+					add_child(value)
+			else:
+				add_child(value)
+
+			move_child(value, 1)  # Background should be first (bottom)
 		update_configuration_warnings()
 
 
@@ -52,12 +76,21 @@ extends MarginContainer
 @export var content_node: Control:
 	get: return _content_node
 	set(value):
-		if _content_node:
-			remove_child(_content_node)
+		if _content_node == value:
+			return
+
 		_content_node = value
+
 		if value:
-			add_child(value)
-			move_child(value, 2)  # Content should be last (top)
+			var existing_parent = value.get_parent()
+			if existing_parent:
+				if existing_parent != self:
+					existing_parent.remove_child(value)
+					add_child(value)
+			else:
+				add_child(value)
+
+			move_child(value, 2)  # Background should be first (bottom)
 		update_configuration_warnings()
 
 @export_tool_button("Create Default") var create_default_content_action = create_default_content
