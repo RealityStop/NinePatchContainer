@@ -14,13 +14,13 @@ While Godot provides built-in support for nine-patch rectangles and basic nine-p
 
 For instance, with stylized corners and no built-in background, here is what is achievable with PanelContainer.  This demonstrates the excessive padding, due to the PanelContainer being unable to overlap the corners with the content area.  Adding a background that resizes with content also requires advanced manipulation of parent and sibling UI nodes.
 
-![PanelContainerMargin](doc/images/problem content.png)
+![PanelContainerMargin](doc/images/problemcontent.png)
 
 
 
 This addon addresses these limitations by using `MarginContainer` and `NinePatchRect` to dynamically compose nine-patch containers with full customization capabilities.  With NinePatchContainer, it is easy to achieve a better result, with custom content margins and background:
 
-![PanelContainerMargin](doc/images/fixed content.png)
+![PanelContainerMargin](doc/images/fixedcontent.png)
 
 ## Features
 
