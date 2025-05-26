@@ -75,6 +75,7 @@ class_name NinePatchContainer
 
 @export_tool_button("Create Default") var create_default_frame_action = create_default_frame
 
+
 @export_category("Content")
 @export var content_node: Control:
 	get: return _content_node
@@ -111,10 +112,12 @@ var _content_node: Control
 func _ready() -> void:
 	update_configuration_warnings()
 
+
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_SORT_CHILDREN:
 		if Engine.is_editor_hint():
 			update_configuration_warnings()
+
 
 func _get_configuration_warnings() -> PackedStringArray:
 	var warnings: PackedStringArray = []
@@ -125,6 +128,7 @@ func _get_configuration_warnings() -> PackedStringArray:
 		warnings.append("Content node is not set")
 
 	return warnings
+
 
 #-----
 # Editor methods
