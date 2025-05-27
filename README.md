@@ -36,6 +36,7 @@ Structuring content in this manner provides a number of benefits:
 - **Customizable Margins and Layering**: Full control over content margins, content, and layout
 - **Editor Integration**: Built-in editor tools for quick setup
 - **Dynamic Node Management**: Automatic handling of node parenting and ordering
+- **Negative Margin Support**:  Unlike PanelContainer, NinePatchContainer fully supports negative margins.
 
 ## Installation
 
@@ -45,33 +46,40 @@ Structuring content in this manner provides a number of benefits:
 
 ## Usage
 
-### Basic Setup
+The NinePatchContainer is intended to be easy to use from within the editor, though all of the functionality is exposed through the code API as well.  Most users will find the editor access to be vastly simpler.
+
+### Visual Setup
 
 1. Add a `NinePatchContainer` node to your scene
-2. (Optional) Use the editor buttons to create default nodes for:
+
+2. (Optional) Use the editor inspector buttons to create default nodes for:
    - Background (optional)
    - Frame (nine-patch)
    - Content
-   
-     ---- OR ----
-   
-     Manually create the desired nodes and assign them
 
-### Properties
+   as required.  Alternatively, use the picker to assign an existing node to one of the roles above, which will reparent the control such that it adheres to the above structure.  This ensures that content layers itself properly.
 
-#### Background (Optional)
+   
+
+### Code Setup
+
+Manually create the desired nodes and assign them via code.
+
+#### Properties
+
+##### Background (Optional)
 - `background_node`: Control node for the background layer
 - `create_default_background_action`: Creates a default `MarginContainer` as background
 
-#### Frame
+##### Frame
 - `frame_node`: Control node for the nine-patch frame
 - `create_default_frame_action`: Creates a default `NinePatchRect` as frame
 
-#### Content
+##### Content
 - `content_node`: Control node for the content
 - `create_default_content_action`: Creates a default `MarginContainer` for content
 
-### Code Example
+#### Code Example
 
 ```gdscript
 # Create a new NinePatchContainer
@@ -95,6 +103,20 @@ var label = Label.new()
 label.text = "Hello, World!"
 container.content_node.add_child(label)
 ```
+
+
+
+## FAQ
+
+### How do I manually adjust margins?
+
+Assuming you used the buttons to create the default structure, there are three places to adjust margins, depending on the desired effect.  
+
+* Adjusting the root node's style constants can provide a margin around all content at once.  This is useful if the control is hosted inside of a larger UI layout.
+* Adjusting the Background node's MarginContainer allows you to control how much space is automatically added before the background content is drawn.  Increasing the margins here will shrink the background inward.  This can be useful if you want fanciful corner effects outside the actual core area.
+* Adjusting the Content node's MarginContainer allows you to control how much space is giving the remaining space to the content.  This is usually needed if you have large sides or corners to ensure that the content is inset enough to not overlap the frame.
+
+### HELP!  
 
 ## License
 
