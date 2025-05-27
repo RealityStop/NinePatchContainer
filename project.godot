@@ -16,4 +16,4 @@ config/icon="res://icon.svg"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/NinePathContainer/plugin.cfg")
+enabled=PackedStringArray("res://addons/NinePatchContainer/plugin.cfg")
