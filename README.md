@@ -1,6 +1,6 @@
 # NinePatchContainer
 
-A custom Godot control that provides enhanced nine-patch container functionality with support for customizable background, frame, and content margins.
+A custom Godot container that provides enhanced nine-patch functionality with support for customizable background, frame, and content margins.
 
 ## Overview
 
